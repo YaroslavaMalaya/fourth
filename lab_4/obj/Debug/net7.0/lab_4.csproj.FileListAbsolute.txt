@@ -1,0 +1,11 @@
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/bin/Debug/net7.0/lab_4
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/bin/Debug/net7.0/lab_4.dll
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/bin/Debug/net7.0/lab_4.pdb
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/obj/Debug/net7.0/lab_4.csproj.AssemblyReference.cache
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/obj/Debug/net7.0/lab_4.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/obj/Debug/net7.0/lab_4.AssemblyInfoInputs.cache
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/obj/Debug/net7.0/lab_4.AssemblyInfo.cs
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/obj/Debug/net7.0/lab_4.csproj.CoreCompileInputs.cache
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/obj/Debug/net7.0/lab_4.dll
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/obj/Debug/net7.0/refint/lab_4.dll
+/Users/Yarrochka/Мої файли/Study/IT 3/fourth/lab_4/obj/Debug/net7.0/lab_4.pdb
