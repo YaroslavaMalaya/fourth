@@ -18,16 +18,14 @@ public class Huffman
             minHeap.Remove(left);
             var right = minHeap.Min();
             minHeap.Remove(right);
-            var main = new MinHeapNode((char)(left.Letter + right.Letter), left.Frequency + right.Frequency);
+            var main = new MinHeapNode('$', left.Frequency + right.Frequency);
             main.left = left;
             main.right = right;
 
             minHeap.Add(main);
         }
-
         
         var min = minHeap.Min();
-        var code = "";
         foreach (var element in dictionary)
         {
             dict[element.Key] = Travel(min, element.Key);
