@@ -2,11 +2,11 @@ namespace lab_4;
 
 public class MinHeapNode
 {
-    public char Letter;
+    public string Letter;
     public int Frequency; // частота
     public MinHeapNode? left, right; // типу діти
 
-    public MinHeapNode(char letter, int frequency)
+    public MinHeapNode(string letter, int frequency)
     {
         left = right = null;
         Letter = letter;

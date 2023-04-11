@@ -2,10 +2,10 @@ namespace lab_4;
 
 public class Huffman
 {
-    public Dictionary<char, string> dict = new Dictionary<char, string>();
+    public Dictionary<string, string> dict = new Dictionary<string, string>();
     private MinHeap minHeap = new MinHeap();
 
-    public Dictionary<char, string> HuffmanCode(Dictionary<char, int> dictionary)
+    public Dictionary<string, string> HuffmanCode(Dictionary<string, int> dictionary)
     {
         foreach (var element in dictionary)
         {
@@ -18,7 +18,7 @@ public class Huffman
             minHeap.Remove(left);
             var right = minHeap.Min();
             minHeap.Remove(right);
-            var main = new MinHeapNode('$', left.Frequency + right.Frequency);
+            var main = new MinHeapNode("", left.Frequency + right.Frequency);
             main.left = left;
             main.right = right;
 
@@ -33,7 +33,7 @@ public class Huffman
         return dict;
     }
 
-    public string? Travel(MinHeapNode current, char goal)
+    public string? Travel(MinHeapNode current, string goal)
     {
         if (current.Letter == goal)
         {

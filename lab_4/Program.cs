@@ -1,28 +1,47 @@
 ﻿using lab_4;
 
-var dictionary = new Dictionary<char, int>();
-StreamReader reader = new StreamReader("sherlok.txt");
-string line;
+var dictionary = new Dictionary<string, int>();
+var text = File.ReadAllText("Sherlock.txt");
 
-while ((line = reader.ReadLine()) != null)
+foreach (char c in text)
 {
-    foreach (char c in line)
+    if (c == '\n')
     {
-        if (dictionary.ContainsKey(c))
+        if (dictionary.ContainsKey("<N>"))
         {
-            dictionary[c]++;
+            dictionary["<N>"]++;
         }
         else
         {
-            dictionary[c] = 1;
+            dictionary["<N>"] = 1;
         }
     }
+    else if (c == '\r')
+    {
+        if (dictionary.ContainsKey("<R>"))
+        {
+            dictionary["<R>"]++;
+        }
+        else
+        {
+            dictionary["<R>"] = 1;
+        }
+    }
+    else if (dictionary.ContainsKey(c.ToString()))
+    {
+        dictionary[c.ToString()]++;
+    }
+    else
+    {
+        dictionary[c.ToString()] = 1;
+    }
 }
+
 
 Console.ForegroundColor = ConsoleColor.Magenta;
 Console.WriteLine("Frequency of all characters:");
 Console.ForegroundColor = ConsoleColor.White;
-foreach (KeyValuePair<char, int> pair in dictionary)
+foreach (KeyValuePair<string, int> pair in dictionary)
 {
     Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
 }
@@ -31,59 +50,63 @@ Console.ForegroundColor = ConsoleColor.Magenta;
 Console.WriteLine("\nHuffman code of all characters:");
 Console.ForegroundColor = ConsoleColor.White;
 var code = new Huffman().HuffmanCode(dictionary);
-foreach (KeyValuePair<char, string> pair in code)
+FileStream fss = new FileStream("Table_codes.txt", FileMode.OpenOrCreate);
+StreamWriter table = new StreamWriter(fss);
+foreach (KeyValuePair<string, string> pair in code)
 {
     Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
+    table.Write("{0}: {1}\n", pair.Key, pair.Value);
+    table.Flush();
 }
 
 
-FileStream fs = new FileStream("sherlok_01.txt", FileMode.OpenOrCreate);
+FileStream fs = new FileStream("Sherlock_code.txt", FileMode.OpenOrCreate);
 StreamWriter write = new StreamWriter(fs);
-StreamReader reader2 = new StreamReader("sherlok.txt");
-string line2 = reader2.ReadToEnd();
+var text2 = File.ReadAllText("Sherlock.txt");
 
-foreach (char c in line2)
+foreach (char c in text2)
 {
     if (c == '\n')
     {
-        write.Write("<N>");
+        write.Write(code["<N>"]);
     }
     else if (c == '\r')
     {
-        write.Write("<R>");
+        write.Write(code["<R>"]);
     }
-    else if (code.ContainsKey(c))
+    else if (code.ContainsKey(c.ToString()))
     {
-        write.Write(code[c]);
+        write.Write(code[c.ToString()]);
     }
     write.Flush();
 }
 
-StreamReader reader3 = new StreamReader("sherlok_01.txt");
-FileStream fs2 = new FileStream("sherlok_02.txt", FileMode.OpenOrCreate);
+var text3 = File.ReadAllText("Sherlock_code.txt");
+FileStream fs2 = new FileStream("Sherlock_decode.txt", FileMode.OpenOrCreate);
 StreamWriter write2 = new StreamWriter(fs2);
 var check = "";
 
-foreach (var character in reader3.ReadLine())
+foreach (var character in text3)
 {
     var c = character.ToString();
-    if (check == "<N>")
+    if (code.ContainsValue(check))
     {
-        write2.Write('\n');
-        check = "";
-    }
-    else if (check == "<R>")
-    {
-        write2.Write('\r');
-        check = "";
-    }
-    else if (code.ContainsValue(check))
-    {
-        foreach (KeyValuePair<char, string> pair in code)
+        foreach (KeyValuePair<string, string> pair in code)
         {
             if (pair.Value == check)
             {
-                write2.Write(pair.Key);
+                if (pair.Key == "<N>")
+                {
+                    write2.Write('\n');
+                }
+                else if (pair.Key == "<R>")
+                {
+                    write2.Write('\r');
+                }
+                else
+                {
+                    write2.Write(pair.Key);
+                }
                 check = "";
                 break;
             }
@@ -92,10 +115,6 @@ foreach (var character in reader3.ReadLine())
     check += c;
     write2.Flush();
 }
-
-reader.Close();
-reader2.Close();
-reader3.Close();
 write.Close();
 write2.Close();
 fs.Close();
